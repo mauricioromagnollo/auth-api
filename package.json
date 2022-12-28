@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "npx standard --fix",
-    "test": "jest --passWithNoTests --noStackTrace --runInBand",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand --silent --verbose --colors",
     "test:unit": "npm test -- -c jest.config.unit.js --watch",
     "test:integration": "npm test -- -c jest.config.integration.js --watch",
     "test:staged": "npm test -- --findRelatedTests",
