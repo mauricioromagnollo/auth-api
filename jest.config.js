@@ -4,7 +4,7 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverageFrom: [
     '<rootDir>/src/**/*.js',
-    '!**/test/**',
+    '!**/tests/**',
     '!**/**/index.js'
   ]
 }
