@@ -1,3 +1,5 @@
+const { randomUUID } = require('crypto')
+
 const { LoadUserByEmailRepository } = require('../../../../src/infra/repositories')
 
 const makeSut = () => {
@@ -11,7 +13,7 @@ const makeSut = () => {
 }
 
 const makeRandomId = () => {
-  return 'any_id'
+  return randomUUID()
 }
 
 const makeUserModelSpy = () => {
@@ -59,5 +61,6 @@ describe('LoadUserByEmailRepository', () => {
     const user = await sut.exec(email)
 
     expect(user.email).toBe(addedUser.email)
+    expect(user).toHaveProperty('_id')
   })
 })
