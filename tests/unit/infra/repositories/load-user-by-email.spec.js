@@ -1,6 +1,7 @@
 const { randomUUID } = require('crypto')
 
 const { LoadUserByEmailRepository } = require('../../../../src/infra/repositories')
+const { MissingParamError } = require('../../../../src/utils/errors')
 
 const makeSut = () => {
   const userModelSpy = makeUserModelSpy()
@@ -70,5 +71,13 @@ describe('LoadUserByEmailRepository', () => {
     const promise = sut.exec('any_email@mail.com')
 
     expect(promise).rejects.toThrow()
+  })
+
+  test('should throw if no email is provided', () => {
+    const { sut } = makeSut()
+
+    const promise = sut.exec()
+
+    expect(promise).rejects.toThrow(new MissingParamError('email'))
   })
 })
