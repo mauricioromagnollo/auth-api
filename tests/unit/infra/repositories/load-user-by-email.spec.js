@@ -10,10 +10,14 @@ const makeSut = () => {
   }
 }
 
+const makeRandomId = () => {
+  return 'any_id'
+}
+
 const makeUserModelSpy = () => {
   return {
     users: [
-      { email: '' }
+      { _id: '', email: '', password: '' }
     ],
     findOne ({ email }) {
       const user = this.users.find(user => user.email === email)
@@ -26,7 +30,14 @@ const makeUserModelSpy = () => {
         return null
       }
 
-      return this.users.push({ email })
+      const newUser = {
+        _id: makeRandomId(),
+        email
+      }
+
+      this.users.push(newUser)
+
+      return newUser
     }
   }
 }
@@ -43,10 +54,10 @@ describe('LoadUserByEmailRepository', () => {
   test('should return an user if user is found', async () => {
     const { sut, userModelSpy } = makeSut()
     const email = 'valid_email@mail.com'
-    userModelSpy.insertOne({ email })
+    const addedUser = userModelSpy.insertOne({ email })
 
     const user = await sut.exec(email)
 
-    expect(user.email).toBe(email)
+    expect(user.email).toBe(addedUser.email)
   })
 })

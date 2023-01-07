@@ -4,7 +4,13 @@ class LoadUserByEmailRepository {
   }
 
   async exec (email) {
-    return this.userModel.findOne({ email })
+    return this.userModel.findOne({
+      email
+    }, {
+      projection: {
+        password: 1
+      }
+    })
   }
 }
 
