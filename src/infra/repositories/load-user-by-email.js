@@ -1,6 +1,10 @@
 class LoadUserByEmailRepository {
+  constructor (userModel) {
+    this.userModel = userModel
+  }
+
   async exec (email) {
-    return null
+    return this.userModel.findOne({ email })
   }
 }
 
