@@ -26,11 +26,11 @@
   },
   "scripts": {
     "lint": "npx standard --fix",
-    "test": "jest --passWithNoTests --noStackTrace --runInBand --silent --verbose --colors",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand --colors",
     "test:unit": "npm test -- -c jest.config.unit.js --watch",
     "test:integration": "npm test -- -c jest.config.integration.js --watch",
-    "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage",
+    "test:staged": "npm test -- --findRelatedTests --silent --verbose",
+    "test:ci": "npm test -- --coverage --silent --verbose",
     "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info",
     "prepare": "husky install"
   },
