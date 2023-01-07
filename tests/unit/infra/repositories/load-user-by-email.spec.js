@@ -63,4 +63,12 @@ describe('LoadUserByEmailRepository', () => {
     expect(user.email).toBe(addedUser.email)
     expect(user).toHaveProperty('_id')
   })
+
+  test('should throw if no userModel is provided', () => {
+    const sut = new LoadUserByEmailRepository()
+
+    const promise = sut.exec('any_email@mail.com')
+
+    expect(promise).rejects.toThrow()
+  })
 })
