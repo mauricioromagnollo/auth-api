@@ -1,5 +1,6 @@
 const { DatabaseHelper } = require('../../../../src/infra/helpers/database')
 const { LoadUserByEmailRepository } = require('../../../../src/infra/repositories/load-user-by-email')
+const { MissingParamError } = require('../../../../src/utils/errors')
 
 let databaseHelper = null
 let db = null
@@ -48,5 +49,21 @@ describe('LoadUserByEmailRepository', () => {
     const user = await sut.exec('valid_email@mail.com')
 
     expect(user._id).toEqual(fakeUser.insertedId)
+  })
+
+  test('should throw if no UserModel is provided', () => {
+    const sut = new LoadUserByEmailRepository()
+
+    const promise = sut.exec('any_email@mail.com')
+
+    expect(promise).rejects.toThrow()
+  })
+
+  test('should throw if no email is provided', () => {
+    const { sut } = makeSut()
+
+    const promise = sut.exec()
+
+    expect(promise).rejects.toThrow(new MissingParamError('email'))
   })
 })
