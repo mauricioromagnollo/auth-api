@@ -14,7 +14,8 @@ class LoadUserByEmailRepository {
       email
     }, {
       projection: {
-        password: 1
+        password: 1,
+        email: 1
       }
     })
   }
