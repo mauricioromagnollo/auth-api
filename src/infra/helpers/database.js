@@ -18,10 +18,21 @@ class DatabaseHelper {
     await this.client.close()
   }
 
+  async isConnected () {
+    try {
+      await this.db.command({ ping: 1 })
+      return true
+    } catch (err) {
+      return false
+    }
+  }
+
   async getDb () {
-    if (!this.client.isConnected()) {
+    if (!await this.isConnected()) {
       await this.connect(this.url, this.dbName)
     }
+
+    return this.db
   }
 }
 
