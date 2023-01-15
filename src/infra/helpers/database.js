@@ -1,26 +1,33 @@
 const { MongoClient } = require('mongodb')
 
 class DatabaseHelper {
-  async connect (url, dbName) {
-    this.url = url
-    this.dbName = dbName
+  constructor () {
+    this._db = null
+    this._client = null
+    this._url = null
+    this._dbName = null
+  }
 
-    this.client = new MongoClient(this.url, {
+  async connect (url, dbName) {
+    this._url = url
+    this._dbName = dbName
+
+    this._client = new MongoClient(this._url, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
 
-    await this.client.connect()
-    this.db = this.client.db(this.dbName)
+    await this._client.connect()
+    this._db = this._client.db(this._dbName)
   }
 
   async disconnect () {
-    await this.client.close()
+    await this._client.close()
   }
 
   async isConnected () {
     try {
-      await this.db.command({ ping: 1 })
+      await this._db.command({ ping: 1 })
       return true
     } catch (err) {
       return false
@@ -29,10 +36,10 @@ class DatabaseHelper {
 
   async getDb () {
     if (!await this.isConnected()) {
-      await this.connect(this.url, this.dbName)
+      await this.connect(this._url, this._dbName)
     }
 
-    return this.db
+    return this._db
   }
 }
 

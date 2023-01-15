@@ -2,13 +2,14 @@ const { DatabaseHelper } = require('../../../../src/infra/helpers/database')
 const { LoadUserByEmailRepository } = require('../../../../src/infra/repositories/load-user-by-email')
 
 let databaseHelper = null
+let db = null
 
 const USERS_COLLECTION = 'users'
 const DATABASE_NAME = 'auth_api_test'
 const DATABASE_CONNECTION_URL = `mongodb://root:root@localhost:27017/${DATABASE_NAME}?authSource=admin`
 
 const makeSut = () => {
-  const userModel = databaseHelper.db.collection(USERS_COLLECTION)
+  const userModel = db.collection(USERS_COLLECTION)
   const sut = new LoadUserByEmailRepository(userModel)
 
   return {
@@ -21,10 +22,11 @@ describe('LoadUserByEmailRepository', () => {
   beforeAll(async () => {
     databaseHelper = new DatabaseHelper()
     await databaseHelper.connect(DATABASE_CONNECTION_URL, DATABASE_NAME)
+    db = await databaseHelper.getDb()
   })
 
   beforeEach(async () => {
-    await databaseHelper.db.collection(USERS_COLLECTION).deleteMany()
+    await db.collection(USERS_COLLECTION).deleteMany()
   })
 
   afterAll(async () => {
