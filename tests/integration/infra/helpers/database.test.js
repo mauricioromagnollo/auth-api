@@ -1,22 +1,29 @@
-// const { DatabaseHelper } = require('../../../../src/infra/helpers/database')
+const { DatabaseHelper } = require('../../../../src/infra/helpers/database')
 
-// const sut = new DatabaseHelper()
+const DATABASE_NAME = 'auth_api_test'
+const DATABASE_CONNECTION_URL = `mongodb://root:root@localhost:27017/${DATABASE_NAME}?authSource=admin`
 
-describe('Mongo Helper', () => {
-  // beforeAll(async () => {
-  //   await sut.connect('mongodb://db:27017', 'auth_api')
-  // })
+describe('DatabaseHelper', () => {
+  const sut = new DatabaseHelper()
 
-  // afterAll(async () => {
-  //   await sut.disconnect()
-  // })
+  afterAll(async () => {
+    await sut.disconnect()
+  })
 
-  test('Should reconnect when getCollection() is invoked and client is disconnected', async () => {
-    expect(true).toBeTruthy()
-    // expect(sut.db).toBeTruthy()
-    // await sut.disconnect()
-    // expect(sut.db).toBeFalsy()
-    // await sut.getCollection('users')
-    // expect(sut.db).toBeTruthy()
+  test('should connect to database', async () => {
+    await sut.connect(DATABASE_CONNECTION_URL, DATABASE_NAME)
+    expect(await sut.isConnected()).toBeTruthy()
+    const db = await sut.getDb()
+    expect(db).toBeTruthy()
+    await sut.disconnect()
+    expect(await sut.isConnected()).toBeFalsy()
+  })
+
+  test('should connect to database when is not connected and getDb is required', async () => {
+    await sut.connect(DATABASE_CONNECTION_URL, DATABASE_NAME)
+    await sut.disconnect()
+    const db = await sut.getDb()
+    expect(db).toBeTruthy()
+    await sut.disconnect()
   })
 })
