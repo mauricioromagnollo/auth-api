@@ -20,9 +20,6 @@ services:
     container_name: auth-api-mongodb
     hostname: docker
     restart: always
-    volumes:
-      - ./.docker/dbdata:/data/db
-      - ./.docker/mongo:/docker-entrypoint-initdb.d
     ports:
       - ${DATABASE_PORT}:27017
     environment:
