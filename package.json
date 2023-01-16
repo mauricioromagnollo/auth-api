@@ -24,7 +24,9 @@
       "jest"
     ]
   },
+  "main": "src/main/index.js",
   "scripts": {
+    "start": "node src/main/index.js",
     "lint": "npx standard --fix",
     "test": "jest --passWithNoTests --noStackTrace --runInBand --colors",
     "test:unit": "npm test -- -c jest.config.unit.js --watch",
@@ -39,7 +41,8 @@
     "husky": "^8.0.2",
     "jest": "^29.3.1",
     "lint-staged": "^13.1.0",
-    "standard": "^16.0.3"
+    "standard": "^16.0.3",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
