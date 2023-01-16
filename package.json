@@ -27,8 +27,9 @@
   "main": "src/main/index.js",
   "scripts": {
     "start": "node src/main/index.js",
+    "dev": "NODE_ENV=test node src/main/index.js",
     "lint": "npx standard --fix",
-    "test": "jest --passWithNoTests --noStackTrace --runInBand --colors",
+    "test": "NODE_ENV=test jest --passWithNoTests --noStackTrace --runInBand --colors",
     "test:unit": "npm test -- -c jest.config.unit.js --watch",
     "test:integration": "npm test -- -c jest.config.integration.js --watch",
     "test:staged": "npm test -- --findRelatedTests --silent --verbose",
@@ -46,6 +47,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
