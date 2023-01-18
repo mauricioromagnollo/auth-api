@@ -10,7 +10,7 @@ class LoadUserByEmailRepository {
       throw new MissingParamError('email')
     }
 
-    return this.userModel.findOne({
+    const user = await this.userModel.findOne({
       email
     }, {
       projection: {
@@ -18,6 +18,8 @@ class LoadUserByEmailRepository {
         email: 1
       }
     })
+
+    return user
   }
 }
 

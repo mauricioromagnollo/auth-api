@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 
 const { setupApp } = require('./setup')
+const { setupRoutes } = require('./routes')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -12,6 +13,7 @@ if (NODE_ENV !== 'prd') {
 }
 
 setupApp(app)
+setupRoutes(app)
 
 module.exports = {
   app

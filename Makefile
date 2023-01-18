@@ -4,7 +4,7 @@
 
 DEV_ENV_FILE = .env.dev
 TEST_ENV_FILE = .env.test
-CONTAINER_APP_NAME = auth-api-mongodb
+CONTAINER_APP_NAME = auth-api-app
 
 # ========================
 # REUSABLE COMMANDS
@@ -29,3 +29,6 @@ stop:
 
 down:
 	$(DOCKER_COMPOSE_DEV) down
+
+open-container:
+	docker exec -it $(CONTAINER_APP_NAME) /bin/bash
