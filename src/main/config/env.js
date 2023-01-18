@@ -1,6 +1,7 @@
 const Env = {
   NODE_ENV: process.env.NODE_ENV || 'dev',
   PORT: Number(process.env.PORT) || 3000,
+  TOKEN_SECRET: process.env.TOKEN_SECRET || 'any_secret',
   DATABASE_USERNAME: process.env.DATABASE_USERNAME || 'root',
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || 'root',
   DATABASE_NAME: process.env.DATABASE_NAME || 'auth_api',
