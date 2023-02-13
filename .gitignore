@@ -1,9 +1,0 @@
-node_modules
-coverage
-*.txt
-.env
-
-# .docker
-.docker/*
-!.docker/mongodb
-!.docker/entrypoint.sh
