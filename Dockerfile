@@ -9,6 +9,4 @@ WORKDIR /home/node/app
 
 COPY package.json package-lock.json /home/node/app/
 
-RUN npm ci --silent
-
 COPY . .

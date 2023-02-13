@@ -5,7 +5,10 @@ const { MissingParamError, InvalidParamError } = require('../../../../src/utils/
 const makeSut = () => {
   const authUseCaseSpy = makeAuthUseCaseSpy()
   const emailValidatorSpy = makeEmailValidatorSpy()
-  const sut = new LoginRouter(authUseCaseSpy, emailValidatorSpy)
+  const sut = new LoginRouter({
+    authUseCase: authUseCaseSpy,
+    emailValidator: emailValidatorSpy
+  })
 
   return {
     sut,

@@ -1,6 +1,7 @@
 {
   "*.js": [
     "npm run lint",
+    "make build",
     "npm run test:staged"
   ]
 }
